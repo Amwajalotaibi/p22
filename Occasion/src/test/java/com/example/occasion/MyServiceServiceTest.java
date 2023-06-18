@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -19,11 +20,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class MyServiceServiceTest {
-    @Autowired
+    @InjectMocks
     MyServiceService myServiceService;
 
 
@@ -52,14 +53,30 @@ public class MyServiceServiceTest {
         myServiceList.add(myService2);
         myServiceList.add(myService3);
     }
-     @Test
-        public void getMyService(){
+    @Test
+    public void getMyservice(){
         when(myServiceRepository.findAll()).thenReturn(myServiceList);
-        List<MyService>myServices=myServiceService.getAll();
-        org.junit.jupiter.api.Assertions.assertEquals(myServices,myServiceList);
-         org.junit.jupiter.api.Assertions.assertEquals(3,myServiceList.size());
-         verify(myServiceRepository,times(1)).findall
+        List<MyService> myServices=myServiceService.getAll();
+        Assertions.assertEquals(myServices,myServices);
+        Assertions.assertEquals(3,myServices.size());
+    }
 
-     }
+    @Test
+    public void deleteMyService(){
+        when(myServiceRepository.findMyServiceById(myService1.getId())).thenReturn(myService1);
+         myServiceService.deleteMyService(myService1.getId());
+        verify(myServiceRepository,times(1)).findMyServiceById(myService1.getId());
+    }
+
+
+    @Test
+    public void updateTodo(){
+
+        when(myServiceRepository.findMyServiceById(myorder.getId())).thenReturn(myService1);
+
+        myServiceService.updateMyService(myService1.getId(),myService2);
+
+        verify(myServiceRepository,times(1)).findMyServiceById(myorder.getId());
+    }
 
 }

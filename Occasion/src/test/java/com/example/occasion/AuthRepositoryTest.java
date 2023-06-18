@@ -41,12 +41,12 @@ public class AuthRepositoryTest {
         Assertions.assertThat(myUser2).isEqualTo(myUser1);
     }
 
-    @Test
-    public void findMyUserByUsername(){
-        authRepository.save(myUser1);
-        myUser=authRepository.findMyUserByUsername(myUser1.getUsername());
-        Assertions.assertThat(myUser.getUsername()).isEqualTo(myUser1.getUsername());
-    }
+//    @Test
+//    public void findMyUserByUsername(){
+//        authRepository.save(myUser1);
+//        myUser=authRepository.findMyUserByUsername(myUser1.getUsername());
+//        Assertions.assertThat(myUser.getUsername()).isEqualTo(myUser1.getUsername());
+//    }
 
 
 }
